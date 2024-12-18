@@ -15,10 +15,10 @@
 				"name": "Debugging main.py",
 				"type": "debugpy",
 				"request": "launch",
-				"program": "${workspaceFolder}\\src\\main.py",
+				"program": "${workspaceFolder}/src/main.py",
 				"cwd": "${workspaceFolder}",
 				"console": "integratedTerminal",
-				"envFile": "${workspaceFolder}\\.env",
+				"envFile": "${workspaceFolder}/.env",
 				"env": {
 					"PYTHONPATH": "${workspaceFolder}"
 				},
