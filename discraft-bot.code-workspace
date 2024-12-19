@@ -7,6 +7,9 @@
 	"settings": {
 		"files.autoSave": "afterDelay",
 		"python.analysis.typeCheckingMode": "basic",
+		"files.exclude": {
+			"**/__pycache__": true,
+		}
 	},
 	"launch": {
 		"version": "0.2.0",
