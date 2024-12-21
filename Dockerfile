@@ -1,8 +1,10 @@
 FROM python:3.12.8-slim
 
-COPY ./ /data
 WORKDIR /data
 
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "python3", "-m", "src.main" ]
+COPY src ./src
+
+CMD ["python3", "-m", "src.main"]
