@@ -10,6 +10,8 @@ from src.classes.errors import NotRegisteredUser
 
 
 class Bot(commands.Bot):
+    """Discord 봇 클래스"""
+
     def __init__(self):
         self.logger = logging.getLogger(f"discord.classes.{self.__class__.__name__}")
 
@@ -114,6 +116,8 @@ class Bot(commands.Bot):
 
 
 class Cog(commands.Cog):
+    """명령어 카테고리 클래스"""
+
     # 명령어 도움말에 숨길지 여부
     hidden_help = False
 
