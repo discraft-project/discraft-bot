@@ -8,6 +8,8 @@ from pathlib import Path
 from src.config import ENV
 from src.classes.errors import NotRegisteredUser
 
+# https://github.com/AlexFlipnote/discord_bot.py/blob/master/utils/data.py
+
 
 class Bot(commands.Bot):
     """Discord 봇 클래스"""
@@ -27,7 +29,7 @@ class Bot(commands.Bot):
             help_command=commands.DefaultHelpCommand(),
         )
 
-    async def setup_hook(self) -> None:
+    async def setup_hook(self):
         # Cog 로드
         def task_finish_callback(task: asyncio.Task[None], name: str):
             try:
@@ -109,7 +111,7 @@ class Bot(commands.Bot):
                 f"Content: {ctx.message.content}"
             ), exc_info=error)
 
-    async def close(self) -> None:
+    async def close(self):
         # if self.database is not None:
         #     await self.database.close()
         await super().close()
