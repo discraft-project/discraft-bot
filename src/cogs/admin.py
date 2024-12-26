@@ -7,7 +7,7 @@ from src.classes.bot import Bot, Cog
 class AdminCommands(Cog):
     """관리자 전용 명령어"""
 
-    hidden_help = True # 도움말에 표시하지 않음
+    hidden_help_command = True # 도움말에 표시하지 않음
 
 
     @commands.command(

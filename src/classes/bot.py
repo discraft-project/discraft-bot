@@ -121,7 +121,7 @@ class Cog(commands.Cog):
     """명령어 카테고리 클래스"""
 
     # 명령어 도움말에 숨길지 여부
-    hidden_help = False
+    hidden_help_command = False
 
     def __init__(self, bot: Bot):
         self.bot = bot
