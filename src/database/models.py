@@ -8,8 +8,11 @@ from .session import Base
 class UserInfo(Base):
     """
     DB의 user_info 테이블과 매핑되는 클래스
+
     Attributes:
         discord_user_id (int): 기본 키로 사용되는 Discord 사용자 ID
+
+    DTO Relationships:
         account_info (AccountInfo): 사용자의 계정 정보를 나타내는 AccountInfo 모델과의 관계
         minecraft_player (MinecraftPlayerInfo): 사용자의 마인크래프트 정보를 나타내는 MinecraftPlayerInfo 모델과의 관계
     """
@@ -29,11 +32,14 @@ class UserInfo(Base):
 class AccountInfo(Base):
     """
     DB의 account_info 테이블과 매핑되는 클래스
+
     Attributes:
         account_id (int): 기본 키로 사용되는 계정 ID
         discord_user_id (int): 외래 키로 사용되는 Discord 사용자 ID
         balance (int): 현재 금액
         last_check_in (int): 마지막으로 출석체크한 시간
+
+    DTO Relationships:
         user_info (UserInfo): 사용자 정보를 나타내는 UserInfo 모델과의 관계
     """
 
@@ -54,12 +60,15 @@ class AccountInfo(Base):
 class MinecraftPlayerInfo(Base):
     """
     DB의 minecraft_player_info 테이블과 매핑되는 클래스
+
     Attributes:
         player_id (int): 기본 키로 사용되는 플레이어 ID
         discord_user_id (int): 외래 키로 사용되는 Discord 사용자 ID
         minecraft_username (Optional[str]): Minecraft 닉네임
         minecraft_uuid (Optional[str]): Minecraft UUID
         last_updated_at (int): 마지막으로 테이블이 업데이트된 시간
+
+    DTO Relationships:
         user_info (UserInfo): 사용자 정보를 나타내는 UserInfo 모델과의 관계
     """
 
