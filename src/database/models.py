@@ -1,5 +1,10 @@
-from sqlalchemy import Column, BigInteger, String, Integer, Numeric, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import String, Integer, Numeric, BigInteger, ForeignKey
+from sqlalchemy.orm import (
+    Mapped,
+    mapped_column,
+    relationship,
+)
+from decimal import Decimal
 from typing import Optional
 
 from .session import Base
@@ -19,7 +24,7 @@ class UserInfo(Base):
 
     __tablename__ = "user_info"
 
-    discord_user_id = Column(BigInteger, primary_key=True)
+    discord_user_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
     # 다른 DTO와의 관계 설정
     account_info = relationship("AccountInfo", back_populates="user_info", uselist=False)
@@ -45,10 +50,10 @@ class AccountInfo(Base):
 
     __tablename__ = "account_info"
 
-    account_id = Column(Integer, primary_key=True, autoincrement=True)
-    discord_user_id = Column(BigInteger, ForeignKey("user_info.discord_user_id", ondelete="CASCADE", onupdate="CASCADE"), unique=True)
-    balance = Column(Numeric(18, 0), nullable=False, default=0, comment="현재 금액")
-    last_check_in = Column(BigInteger, nullable=False, default=0, comment="마지막으로 출석체크한 시간")
+    account_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    discord_user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("user_info.discord_user_id", ondelete="CASCADE", onupdate="CASCADE"), unique=True)
+    balance: Mapped[Decimal] = mapped_column(Numeric(18, 0), nullable=False, default=0, comment="현재 금액")
+    last_check_in: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0, comment="마지막으로 출석체크한 시간")
 
     # 다른 DTO와의 관계 설정
     user_info = relationship("UserInfo", back_populates="account_info")
@@ -74,11 +79,11 @@ class MinecraftPlayerInfo(Base):
 
     __tablename__ = "minecraft_player_info"
 
-    player_id = Column(Integer, primary_key=True, autoincrement=True)
-    discord_user_id = Column(BigInteger, ForeignKey("user_info.discord_user_id", ondelete="CASCADE", onupdate="CASCADE"), unique=True)
-    minecraft_username: Column[Optional[str]] = Column(String(16), unique=True, nullable=True, comment="마인크래프트 닉네임")  # type: ignore
-    minecraft_uuid: Column[Optional[str]] = Column(String(36), unique=True, nullable=True, comment="고유 ID")                 # type: ignore
-    last_updated_at = Column(BigInteger, nullable=False, default=0, comment="마지막으로 테이블이 업데이트된 시간")
+    player_id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    discord_user_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("user_info.discord_user_id", ondelete="CASCADE", onupdate="CASCADE"), unique=True)
+    minecraft_username: Mapped[Optional[str]] = mapped_column(String(16), unique=True, nullable=True, comment="마인크래프트 닉네임")
+    minecraft_uuid: Mapped[Optional[str]] = mapped_column(String(36), unique=True, nullable=True, comment="고유 ID")
+    last_updated_at: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0, comment="마지막으로 테이블이 업데이트된 시간")
 
     # 다른 DTO와의 관계 설정
     user_info = relationship("UserInfo", back_populates="minecraft_player")
