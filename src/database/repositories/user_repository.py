@@ -27,7 +27,9 @@ class UserRepository(IRepository[UserInfo]):
         Returns:
             Optional[UserInfo]: 데이터
         """
-        result = await self.session.execute(select(UserInfo).filter(UserInfo.discord_user_id == user_id))
+        result = await self.session.execute(
+            select(UserInfo).filter(UserInfo.discord_user_id == user_id)
+        )
         return result.scalars().first()
 
     async def get_by_mc_name(self, mc_name: str) -> Optional[UserInfo]:
@@ -41,7 +43,9 @@ class UserRepository(IRepository[UserInfo]):
         Returns:
             Optional[UserInfo]: 데이터
         """
-        result = await self.session.execute(select(UserInfo).filter(UserInfo.mc_user_name == mc_name))
+        result = await self.session.execute(
+            select(UserInfo).filter(UserInfo.minecraft_player.has(minecraft_username=mc_name))
+        )
         return result.scalars().first()
 
     async def get_all(self, skip: int = 0, limit: Optional[int] = 100) -> Sequence[UserInfo]:
