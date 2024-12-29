@@ -5,7 +5,7 @@ from sqlalchemy.orm import (
     relationship,
 )
 from decimal import Decimal
-from typing import Optional
+from typing import Optional, Final
 
 from .session import Base
 
@@ -33,6 +33,7 @@ class UserInfo(Base):
     def __repr__(self):
         attrs = ", ".join(f"{k}={v!r}" for k, v in self.__dict__.items() if not k.startswith("_"))
         return f"{self.__class__.__name__}({attrs})"
+
 
 class AccountInfo(Base):
     """
@@ -66,6 +67,10 @@ class MinecraftPlayerInfo(Base):
     """
     DB의 minecraft_player_info 테이블과 매핑되는 클래스
 
+    Constants:
+        MIN_USERNAME_LENGTH (int): Minecraft 닉네임의 최소 길이
+        MAX_USERNAME_LENGTH (int): Minecraft 닉네임의 최대 길이
+
     Attributes:
         player_id (int): 기본 키로 사용되는 플레이어 ID
         discord_user_id (int): 외래 키로 사용되는 Discord 사용자 ID
@@ -76,6 +81,9 @@ class MinecraftPlayerInfo(Base):
     DTO Relationships:
         user_info (UserInfo): 사용자 정보를 나타내는 UserInfo 모델과의 관계
     """
+
+    MIN_USERNAME_LENGTH: Final[int] = 3
+    MAX_USERNAME_LENGTH: Final[int] = 16
 
     __tablename__ = "minecraft_player_info"
 
