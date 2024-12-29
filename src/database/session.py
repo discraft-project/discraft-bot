@@ -10,8 +10,8 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     async_scoped_session,
 )
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import declarative_base
 
 logger = logging.getLogger("discord.database.session")
 Base = declarative_base()
