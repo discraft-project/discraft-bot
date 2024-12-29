@@ -16,19 +16,19 @@ class AccountRepository(IRepository[AccountInfo]):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def get_by_id(self, user_id: int) -> Optional[AccountInfo]:
+    async def get_by_id(self, entity_id: int) -> Optional[AccountInfo]:
         """|coro|
 
-        user_id로 데이터를 가져옵니다.
+        entity_id로 데이터를 가져옵니다.
 
         Args:
-            user_id (int): discord 사용자 ID
+            entity_id (int): discord 사용자 ID
 
         Returns:
             Optional[AccountInfo]: 데이터
         """
         result = await self.session.execute(
-            select(AccountInfo).filter(AccountInfo.discord_user_id == user_id)
+            select(AccountInfo).filter(AccountInfo.discord_user_id == entity_id)
         )
         return result.scalars().first()
 

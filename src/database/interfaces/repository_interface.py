@@ -10,13 +10,13 @@ class IRepository[T](ABC):
         self.session = session
 
     @abstractmethod
-    async def get_by_id(self, id: int) -> Optional[T]:
+    async def get_by_id(self, entity_id: int) -> Optional[T]:
         """|coro|
 
         ID로 데이터를 가져옵니다.
 
         Args:
-            id (int): 데이터 ID
+            entity_id (int): 데이터 ID
 
         Returns:
             Optional[T]: 데이터
