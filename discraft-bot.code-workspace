@@ -11,6 +11,16 @@
 			"**/.pytest_cache": true,
 		},
 		"python.analysis.typeCheckingMode": "basic",
+		"python.analysis.inlayHints.functionReturnTypes": true,
+		"python.analysis.inlayHints.variableTypes": true,
+		"python.analysis.diagnosticSeverityOverrides": {
+			"reportImportCycles": "error",
+			"reportDuplicateImport": "error",
+			"reportUnusedVariable": "warning",
+			"reportUnboundVariable": "warning",
+			"reportUndefinedVariable": "warning",
+			"reportIncompatibleMethodOverride": "warning",
+		},
 		"python.testing.pytestArgs": [
 			"tests"
 		],
